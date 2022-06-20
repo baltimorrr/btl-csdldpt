@@ -73,11 +73,12 @@ def mfcc(audio_file, n_mfccs):
 
 def loadFileInput(audio_file):
     mfccs = mfcc(audio_file, 13)
+    # print(mfccs)
     return mfccs
 
 
 def calculateDistance(arr):
-    fileOpen = open(r"F:\Uni\4\Spring\CSDL-DPT\Audio\FeatureExtraction1.csv", "r")
+    fileOpen = open(r"F:\Uni\4\Spring\CSDL-DPT\code\BTL\FeatureExtraction1.csv", "r")
     reader = csv.reader(fileOpen)
     distanceArr = []
     for row in reader:
@@ -114,47 +115,51 @@ def myFunc(e):
   return e['dis']
 
 
-audio_file = r"F:\Uni\4\Spring\CSDL-DPT\Audio\Viola\Viola10.wav"
+audio_file = r"F:\Uni\4\Spring\CSDL-DPT\code\Sample\Test\Banjo3.wav"
 arr = loadFileInput(audio_file)
 
 distanceArr = calculateDistance(arr)
 distanceArr.sort(key=myFunc)
 
+
+print("=========================")
 print("Predict label: ", KNN(11, distanceArr))
+print("=========================")
 
-predictLabel = []
 
-audio_folder = ["Banjo", "Cello", "DoubleBass", "ElectricBass", "Guitar", "Harp", "Mandolin", "Ukelele", "Viola", "Violin"]
-for i in range(0, len(audio_folder)):
-    instrument = audio_folder[i]
-    audio_type = "\\" + instrument
-    audio_link = "F:\\Uni\\4\\Spring\\CSDL-DPT\\Audio"
+# predictLabel = []
+
+# audio_folder = ["Banjo", "Cello", "DoubleBass", "ElectricBass", "Guitar", "Harp", "Mandolin", "Ukelele", "Viola", "Violin"]
+# for i in range(0, len(audio_folder)):
+#     instrument = audio_folder[i]
+#     audio_type = "\\" + instrument
+#     audio_link = "F:\\Uni\\4\\Spring\\CSDL-DPT\\Audio"
     
-    linkAudioArr = [] # get link file audio
-    for i in range(1, 16):
-        audio_full = audio_link + audio_type + audio_type + str(i) + ".wav"
-        arr = loadFileInput(audio_full)
-        distanceArr = calculateDistance(arr)
-        distanceArr.sort(key=myFunc)
-        label = KNN(11, distanceArr)
-        predictLabel.append(label)
+#     linkAudioArr = [] # get link file audio
+#     for i in range(1, 16):
+#         audio_full = audio_link + audio_type + audio_type + str(i) + ".wav"
+#         arr = loadFileInput(audio_full)
+#         distanceArr = calculateDistance(arr)
+#         distanceArr.sort(key=myFunc)
+#         label = KNN(11, distanceArr)
+#         predictLabel.append(label)
 
 
 
 
-originLabel = []
-fileOpen = open(r"F:\Uni\4\Spring\CSDL-DPT\Audio\FeatureExtraction1.csv", "r")
-reader = csv.reader(fileOpen)
-distanceArr = []
-for row in reader:
-    originLabel.append(row[-1])
+# originLabel = []
+# fileOpen = open(r"F:\Uni\4\Spring\CSDL-DPT\code\BTL\FeatureExtraction1.csv", "r")
+# reader = csv.reader(fileOpen)
+# distanceArr = []
+# for row in reader:
+#     originLabel.append(row[-1])
 
-count = 0
-for item in range(0, 150):
-    if(originLabel[item] == predictLabel[item]): 
-        count += 1
+# count = 0
+# for item in range(0, 150):
+#     if(originLabel[item] == predictLabel[item]): 
+#         count += 1
 
-print(float((count/150)*100))
+# print(float((count/150)*100))
 
 
 

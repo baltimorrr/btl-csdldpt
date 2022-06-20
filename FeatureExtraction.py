@@ -96,7 +96,7 @@ for i in range(0, len(audio_folder)):
         arr = np.append(arr, instrument)
         listFeature.append(arr)
     
-    fileCSV = open("F:\\Uni\\4\\Spring\\CSDL-DPT\\Audio\\FeatureExtraction3.csv", "a", newline="")
+    fileCSV = open("F:\\Uni\\4\\Spring\\CSDL-DPT\\code\\BTL\\FeatureExtraction1.csv", "a", newline="")
     writer = csv.writer(fileCSV)
     writer.writerows(listFeature)
     fileCSV.close()
